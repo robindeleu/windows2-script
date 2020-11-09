@@ -1,5 +1,25 @@
 Write-Host "`n------------------------------------------------------" -ForegroundColor Green
-Write-Host "                Checking 'CPU Usage'"
+Write-Host "                Checking 'CPU Usage WORKING'"
 Write-Host "------------------------------------------------------`n" -ForegroundColor Green
-     
-Get-WmiObject Win32_Processor | Select LoadPercentage | Format-List
+$Processor = (Get-WmiObject -Class win32_processor| Measure-Object -Property LoadPercentage -Average | Select-Object Average).Average
+Write-Output $Processor
+Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+Write-Host "                Checking 'RAM Usage WORKING'"
+Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+$ComputerMemory = Get-WmiObject -Class win32_operatingsystem
+$Memory = ((($ComputerMemory.TotalVisibleMemorySize - $ComputerMemory.FreePhysicalMemory)*100)/ $ComputerMemory.TotalVisibleMemorySize)
+$RoundMemory = [math]::Round($Memory, 2)
+Write-Output $RoundMemory
+Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+Write-Host "                Checking 'Disk Usage WORKING'"
+Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+$TCapacity =@{  Expression = { "{0,19:n2}" -f ($_.Capacity / 1GB) };
+                Name= 'Total Capacity (GB)';}
+$Freespace =@{  Expression = { "{0,15:n2}" -f ($_.FreeSpace / 1GB) };
+                Name = 'Free Space (GB)';
+}
+$PercentFree =@{Expression = { [int]($_.Freespace * 100 / $_.Capacity) };
+                Name = 'Free (%)'
+}
+Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
+Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending
