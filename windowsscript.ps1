@@ -23,3 +23,12 @@ $PercentFree =@{Expression = { [int]($_.Freespace * 100 / $_.Capacity) };
 }
 Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
 Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending
+Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+Write-Host "                Checking 'All installed programs working'"
+Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+Write-Host "                Checking 'All live processes working'"
+Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+$A = Get-Process
+$A | Get-Process | Format-Table -View priority
