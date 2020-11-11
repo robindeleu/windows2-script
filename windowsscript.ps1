@@ -28,8 +28,8 @@ function Disk-Usage {
     $PercentFree =@{Expression = { [int]($_.Freespace * 100 / $_.Capacity) };
                     Name = 'Free (%)'
     }
-    Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
-    Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending
+    Write-Host (Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
+    Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending | Out-String)
 }
 
 function Installed-Programs {
