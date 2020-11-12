@@ -6,6 +6,7 @@
 . .\show-event-logs.ps1
 . .\show-installed-programs.ps1
 . .\users.ps1
+. .\run-with-elevated-permissions.ps1
 
 function Show-Menu {
     param (
@@ -22,6 +23,7 @@ function Show-Menu {
     Write-Host "6: Show Installed Programs"
     Write-Host "7: Show Live Processes"
     Write-Host "8: Show Users"
+    Write-Host "9: Run script with elevated permissions"
     Write-Host "Q: Quit"
 }
 
@@ -59,6 +61,9 @@ do{
         }
         '8' {
             Users
+        }
+        '9' {
+            Run-Elevated
         }
     }
     cmd /c pause
