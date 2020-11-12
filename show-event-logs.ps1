@@ -1,6 +1,7 @@
 function Show-Event-Logs {
     # Date format has to be dd-mm-yyyy
     $compareDate = "11-11-2020"
+    $logsDirectory = "logs"
 
 
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
@@ -32,9 +33,9 @@ function Show-Event-Logs {
     Write-Host "                    Saving Logs                         "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
     $date = Get-Date -format "dd-MM-yyyy"
-    $systemfileLocation = "./logfile-system-$date.txt"
+    $systemfileLocation = "./$logsDirectory/logfile-system-$date.txt"
     New-Item -Path $systemfileLocation -ItemType File
-    $applicationfileLocation = "./logfile-application-$date.txt"
+    $applicationfileLocation = "./$logsDirectory/logfile-application-$date.txt"
     New-Item -Path $applicationfileLocation -ItemType File
     Out-File -inputobject $systemEvents -filepath $systemfileLocation
     Out-File -inputobject $applicationEvents -filepath $applicationfileLocation
@@ -43,8 +44,8 @@ function Show-Event-Logs {
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
     Write-Host "                    Comparing Logs                      "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
-    $comparesystemlog = "./logfile-system-$compareDate.txt"
-    $compareapplicationlog = "./logfile-application-$compareDate.txt"
+    $comparesystemlog = "./$logsDirectory/logfile-system-$compareDate.txt"
+    $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
 
     Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
     Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
