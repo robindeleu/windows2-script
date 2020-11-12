@@ -24,7 +24,6 @@ function Users {
     DifferenceObject = (Get-Content -Path ../usersafter.txt)
     }
 
-<<<<<<< HEAD
 #Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersafter.txt
 Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)
 if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)) {
@@ -32,15 +31,4 @@ if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceO
 }
 else {
     Write-Host  "Files are the same"
-=======
-    Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersafter.txt
-    Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)
-    if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)) {
-        Write-Host "Files are different"
-    }
-    else {
-        Write-Host  "Files are the same"
-    }
-    Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersbefore.txt
->>>>>>> 8fa20ce932862aaefda51b2c026108bb0b83a55e
 }
