@@ -5,10 +5,12 @@
 . .\live-processes.ps1
 . .\show-event-logs.ps1
 . .\show-installed-programs.ps1
+. .\shares.ps1
 
 CPU-Usage
 RAM-Usage
 Disk-Usage
 Show-Event-Logs
+Shares
 #Installed-Programs
 #Live-Processes

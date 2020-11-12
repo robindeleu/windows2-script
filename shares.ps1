@@ -9,4 +9,3 @@ function Shares {
     #Dit is om te vergelijken tussen oud en nieuw
     #Compare-Object -ReferenceObject (Get-Content D:\Users\deleu\Documents\VIVES\powershell.txt) -DifferenceObject (Get-Content D:\Users\deleu\Documents\VIVES\powershell1.txt)
 }
-Shares
