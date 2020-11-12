@@ -89,3 +89,5 @@ Show-Event-Logs
 Installed-Programs
 #Live-Processes
 
+cmd /c pause
+
