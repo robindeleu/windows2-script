@@ -23,7 +23,7 @@ function Show-Menu {
     Write-Host "6: Show Installed Programs"
     Write-Host "7: Show Live Processes"
     Write-Host "8: Show Users"
-    Write-Host "9: Run script with elevated permissions"
+    Write-Host "9: Open current directory with elevated permissions"
     Write-Host "Q: Quit"
 }
 
