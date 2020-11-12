@@ -66,6 +66,18 @@ function Installed-Programs {
     Write-Host "                Checking Installed Programs                           "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
     Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+    
+    # voor het opslaan van dit bestand:
+    #$storelocation= C:\Users\deleu\Documents\InstalledPrograms-PS-befor.txt
+    #Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table –AutoSize > $storelocation
+
+    #Als je wil vergelijken voor en na
+    
+    #$befor = C:\Users\deleu\Documents\InstalledPrograms-PS-befor.txt
+    #$after = C:\Users\deleu\Documents\InstalledPrograms-PS-after.txt
+    
+    #Compare-Object -ReferenceObject (Get-Content $befor) -DifferenceObject (Get-Content $after)
+
 }
 
 CPU-Usage
