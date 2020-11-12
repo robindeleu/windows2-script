@@ -32,3 +32,4 @@ if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceO
 else {
     Write-Host  "Files are the same"
 }
+}
