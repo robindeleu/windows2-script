@@ -61,11 +61,17 @@ function Show-Event-Logs {
     #Write-Host (Get-EventLog -LogName security -newest 1 | Get-Member | Out-String)
     Write-Host ($mostRecentEvent | Out-String)
 }
+function Installed-Programs {
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                Checking Installed Programs                           "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
+}
 
 CPU-Usage
 RAM-Usage
 Disk-Usage
 Show-Event-Logs
-#Installed-Programs
+Installed-Programs
 #Live-Processes
 
