@@ -26,5 +26,3 @@ else {
     Write-Host  "Files are the same"
 }
 Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description | Format-Table -AutoSize > ../usersbefore.txt
-
-cmd /c pause
