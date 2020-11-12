@@ -1,14 +1,54 @@
 function Show-Event-Logs {
+    # Date format has to be dd-mm-yyyy
+    $compareDate = "11-11-2020"
+
+
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
-    Write-Host "                Checking Logs                           "
+    Write-Host "                 CHECKING SYSTEM LOG                    "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
-    #Write-Host (Get-WinEvent -ListLog * | where {$_.RecordCount -gt 0} | Out-String)
-    #Logs:   Application, System, Security
+    Write-Host "`n========> System-log: All non-information Entries`n" -ForegroundColor Yellow
     $Begin = Get-Date -Date '11/11/2020 08:00:00'
-    $Stop = Get-Date -Date '11/11/2020 17:00:00'
-    $mostRecentEvent = Get-Eventlog -LogName Application -Message *toestemming* -EntryType warning -After $Begin -Before $Stop | Select-Object -property *
+    $systemEvents = Get-Eventlog -logname System -After $Begin | where {($_.EntryType -NotMatch "Information")} | Sort-Object -Property EventId | Format-Table EventId, Timegenerated, EntryType, Source, Message -autosize
+    Write-Host ($systemEvents | Out-String)
+
+    Write-Host "`n========> System-log: Summary`n" -ForegroundColor Yellow
+    $systemEventsSummary = Get-Eventlog -Logname System -After $Begin | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
+    Write-Host ($systemEventsSummary | Out-String)
 
 
-    #Write-Host (Get-EventLog -LogName security -newest 1 | Get-Member | Out-String)
-    Write-Host ($mostRecentEvent | Out-String)
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "             Checking Application Log                   "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    Write-Host "`n========> Application-log: All non-information Entries`n" -ForegroundColor Yellow
+    $Begin = Get-Date -Date '11/11/2020 08:00:00'
+    $applicationEvents = Get-Eventlog -Logname Application -After $Begin | where {($_.EntryType -NotMatch "Information")} | Sort-Object -Property EventId | Format-Table EventId, Timegenerated, EntryType, Source, Message -autosize
+    Write-Host ($applicationEvents | Out-String)
+
+    Write-Host "`n========> Application-log: Summary`n" -ForegroundColor Yellow
+    $applicationEventsSummary = Get-Eventlog -Logname Application -After $Begin | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
+    Write-Host ($applicationEventsSummary | Out-String)
+
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                    Saving Logs                         "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    $date = Get-Date -format "dd-MM-yyyy"
+    $systemfileLocation = "./logfile-system-$date.txt"
+    New-Item -Path $systemfileLocation -ItemType File
+    $applicationfileLocation = "./logfile-application-$date.txt"
+    New-Item -Path $applicationfileLocation -ItemType File
+    Out-File -inputobject $systemEvents -filepath $systemfileLocation
+    Out-File -inputobject $applicationEvents -filepath $applicationfileLocation
+
+
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                    Comparing Logs                      "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    $comparesystemlog = "./logfile-system-$compareDate.txt"
+    $compareapplicationlog = "./logfile-application-$compareDate.txt"
+
+    Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
+    Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
+
 }
+
+#Show-Event-Logs
