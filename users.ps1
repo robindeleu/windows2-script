@@ -18,11 +18,17 @@ Foreach ($item in $mcAccounts) {
 Write-Host "Number of Local accounts: " $cntLocals
 Write-Host "Number of Microsoft accounts: " $cntMCAccounts "`n"
 
-Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description | Format-Table -AutoSize > ../usersafter.txt
+$objects = @{
+  ReferenceObject = (Get-Content -Path ../usersbefore.txt)
+  DifferenceObject = (Get-Content -Path ../usersafter.txt)
+}
+
+Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersafter.txt
+Compare-Object @objects -ExcludeDifferent
 if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)) {
     Write-Host "Files are different"
 }
 else {
     Write-Host  "Files are the same"
 }
-Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description | Format-Table -AutoSize > ../usersbefore.txt
+Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersbefore.txt
