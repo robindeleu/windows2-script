@@ -51,5 +51,3 @@ function Show-Event-Logs {
     Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
 
 }
-
-#Show-Event-Logs
