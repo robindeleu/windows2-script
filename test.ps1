@@ -32,3 +32,5 @@ Write-Host "                Checking 'All live processes working'"
 Write-Host "------------------------------------------------------`n" -ForegroundColor Green
 $A = Get-Process
 $A | Get-Process | Format-Table -View priority
+
+cmd /c pause
