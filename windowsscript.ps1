@@ -66,6 +66,6 @@ do{
             Run-Elevated
         }
     }
-    cmd /c pause
+ cmd /c pause
 }
 until ($selection -eq 'q')
