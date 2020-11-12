@@ -25,7 +25,7 @@ function Users {
     }
 
     Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > ../usersafter.txt
-    Compare-Object @objects -ExcludeDifferent
+    Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)
     if(Compare-Object -ReferenceObject (Get-Content ../usersbefore.txt) -DifferenceObject (Get-Content ../usersafter.txt)) {
         Write-Host "Files are different"
     }
