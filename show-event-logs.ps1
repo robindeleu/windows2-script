@@ -85,16 +85,28 @@ function Show-Event-Logs {
 
 
 
-    # Write-Host "`n------------------------------------------------------" -ForegroundColor Green
-    # Write-Host "                    Saving Logs                         "
-    # Write-Host "------------------------------------------------------`n" -ForegroundColor Green
-    # $date = Get-Date -format "dd-MM-yyyy"
-    # $systemfileLocation = "./$logsDirectory/logfile-system-$date.txt"
-    # New-Item -Path $systemfileLocation -ItemType File
-    # $applicationfileLocation = "./$logsDirectory/logfile-application-$date.txt"
-    # New-Item -Path $applicationfileLocation -ItemType File
-    # Out-File -inputobject $systemEvents -filepath $systemfileLocation
-    # Out-File -inputobject $applicationEvents -filepath $applicationfileLocation
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                    Saving Logs                         "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+
+
+    $date = Get-Date -format "dd-MM-yyyy"
+    
+    $systemFileLocation = "./$logsDirectory/logfile-system-$date.txt"
+    New-Item -Path $systemFileLocation -ItemType File
+    Out-File -inputobject $systemEventList -filepath $systemFileLocation
+    Write-Host "Log saved: $systemFileLocation"
+
+    $securityFileLocation = "./$logsDirectory/logfile-security-$date.txt"
+    New-Item -Path $securityFileLocation -ItemType File
+    Out-File -inputobject $securityEventList -filepath $securityFileLocation
+    Write-Host "Log saved: $systemFileLocation"
+
+    $applicationFileLocation = "./$logsDirectory/logfile-application-$date.txt"
+    New-Item -Path $applicationFileLocation -ItemType File
+    Out-File -inputobject $applicationEventList -filepath $applicationFileLocation
+    Write-Host "Log saved: $systemFileLocation"
+
 
 
     # Write-Host "`n------------------------------------------------------" -ForegroundColor Green
