@@ -5,9 +5,9 @@ function Users {
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
 
     # File names used to store/read
-    $fileBefore = "../usersafter.txt"
-    $fileAfter = "../usersbefore.txt"
-    $fileBackup = "../backupUsers.txt"
+    $fileBefore = "./logs/usersafter.txt"
+    $fileAfter = "./logs/usersbefore.txt"
+    $fileBackup = "./logs/backupUsers.txt"
 
     # Output the important data in a nice formatted table and the date
     Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description | Format-Table -AutoSize
@@ -34,7 +34,7 @@ function Users {
     Get-LocalUser | Sort-Object PrincipalSource | Select Name, PrincipalSource, LastLogon, PasswordChangeableDate, PasswordLastSet, Description > $fileAfter
 
     # Compare the current data with the previous data, if data is different user sees what the differences are
-    Compare-Object -ReferenceObject (Get-Content $fileBefore) -DifferenceObject (Get-Content $fileAfter)
+    Write-host(Compare-Object -ReferenceObject (Get-Content -Path $fileBefore) -DifferenceObject (Get-Content -Path $fileAfter)|Out-String)
 
     # If the files are the same (no change) then it will show the user "Files are the same" otherwise the opposite
     if(Compare-Object -ReferenceObject (Get-Content $fileBefore) -DifferenceObject (Get-Content $fileAfter)) {
