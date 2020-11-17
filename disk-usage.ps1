@@ -17,5 +17,5 @@ function Disk-Usage {
     # Sort by Free space in percent 
     $data =Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
     Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending | Out-String
-    $data
+    Write-Host($data)
 }

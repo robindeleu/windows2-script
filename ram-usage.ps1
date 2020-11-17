@@ -12,7 +12,7 @@ function RAM-Usage {
     # Here we print out the % used RAM
     Write-Output "Live RAM-Usage: $RoundMemory%"
     # To give the a table of top 10 most used RAM processes
-    Get-Process | Sort-Object -Property WS -Descending | Select-Object -First 15| Format-Table `
+    Write-Host(Get-Process | Sort-Object -Property WS -Descending | Select-Object -First 15| Format-Table `
     @{Label = "Used Memory(Mb)"; Expression = {[int]($_.WS / 1Mb)}},
-    ProcessName -AutoSize
+    ProcessName -AutoSize | Out-String)
 }
