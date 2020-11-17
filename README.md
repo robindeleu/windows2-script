@@ -1,5 +1,7 @@
 # Server health check
 
+[![made-for-VSCode](https://img.shields.io/badge/Made%20for-Powershell-1f425f.svg)](https://code.visualstudio.com/)
+
 ## Usage
 
 Run the powershell script by typing in the terminal ".\windowsscript.ps1".
