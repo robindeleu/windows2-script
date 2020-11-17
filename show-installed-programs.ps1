@@ -23,6 +23,6 @@ function Installed-Programs {
     Out-File -inputobject $data -filepath $sharesave -Force
     Write-Host "saved in: $sharesave"
     # This part is to compaire with befor and after
-    Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)
+    Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)|Out-String)
     
 }

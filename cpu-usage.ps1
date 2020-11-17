@@ -7,6 +7,6 @@ function CPU-Usage {
     # Here we print it in the console
     Write-Output "Live processor ussage: $Processor%"
     # Here we make a variabele and print in condole the top 10 intensive processes for the CPU
-    $processescpu = Get-Counter -ErrorAction SilentlyContinue '\Process(*)\% Processor Time' | Select-Object -ExpandProperty countersamples| Select-Object -Property instancename, cookedvalue| ? {$_.instanceName -notmatch "^(idle|_total|system)$"} | Sort-Object -Property cookedvalue -Descending| Select-Object -First 10| ft InstanceName,@{L='CPU';E={($_.Cookedvalue/100/$env:NUMBER_OF_PROCESSORS).toString('P')}} -AutoSize
-    $processescpu
+    $processescpu = Get-Counter -ErrorAction SilentlyContinue '\Process(*)\% Processor Time' | Select-Object -ExpandProperty countersamples| Select-Object -Property instancename, cookedvalue| ? {$_.instanceName -notmatch "^(idle|_total|system)$"} | Sort-Object -Property cookedvalue -Descending| Select-Object -First 10| ft InstanceName,@{L='CPU';E={($_.Cookedvalue/100/$env:NUMBER_OF_PROCESSORS).toString('P')}} -AutoSize | Out-String
+    Write-Host($processescpu)
 }

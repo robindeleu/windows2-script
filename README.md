@@ -36,8 +36,24 @@ Shows the user, the total used CPU usage.
                 Checking 'CPU Usage WORKING'
 ------------------------------------------------------
 
-Live processor ussage: 40%
-Press any key to continue . . .
+Live processor ussage: 41%
+
+InstanceName CPU   
+------------ ---   
+teams        16.70%
+code         15.92%
+code         4.47% 
+dwm          3.88% 
+teams        3.30% 
+teams        2.52% 
+chrome       1.36% 
+audiodg      1.36% 
+code         1.16% 
+skype        0.78% 
+
+
+
+Press any key to continue . . . 
 ```
 
 ## RAM-usage
@@ -226,28 +242,43 @@ Press any key to continue . . .
 
 Shows the user, the first ten installed programs on the system along with the necessary info. And checks if it changed from the last time checked.
 
+Beware, if you want to compair
+
 ```bash
 ------------------------------------------------------
                 Checking Installed Programs
 ------------------------------------------------------
 
 
-DisplayName                    DisplayVersion  Publisher                  InstallDate
------------                    --------------  ---------                  -----------
-Visual Studio Community 2019   16.5.30011.22   Microsoft Corporation      20200511
-Adobe Digital Editions 4.5     4.5.11          Adobe Systems Incorporated
-Arduino                        1.8.9           Arduino LLC
-Audacity 2.3.3                 2.3.3           Audacity Team              20200423
-Battle.net                                     Blizzard Entertainment
+DisplayName                                                                 DisplayVersion   Publisher                  InstallDate
+-----------                                                                 --------------   ---------                  -----------
+Adobe Creative Cloud                                                        4.8.2.476        Adobe Systems Incorporated
+                                                                                             Adobe Systems Incorporated 6/10/2019
 
-Visual Studio Build Tools 2017 15.9.28307.1300 Microsoft Corporation      20201113
-DB Browser for SQLite          3.10.1          DB Browser for SQLite Team
-Digilent Software              1.5.8           Digilent, Inc.
-Dream Aquarium
-
+                                                                                             Adobe Systems Incorporated 6/9/2019   
+Digilent Software                                                           1.5.8            Digilent, Inc.
+GNU Tools for ARM Embedded Processors 6-2017-q2-update 6 2017 (remove only) 6 2017-q2-update ARM Holdings
+Google Chrome                                                               86.0.4240.198    Google LLC                 20201112
+Kaspersky Secure Connection                                                 20.0.14.1085     Kaspersky
+Kaspersky Security Cloud                                                    20.0.14.1085     Kaspersky
 
 
-saved in: ./logs/inst-prog-11-11-2020-1.txt
+
+
+saved in: ./logs/inst-prog-11-11-2020-2.txt
+
+InputObject                                                                                                                         SideIndicator
+-----------                                                                                                                         -------------
+Office 16 Click-to-Run Localization Component                               16.0.13328.20340 Microsoft Corporation      20201113    =>
+Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161              9.0.30729.6161   Microsoft Corporation      20180503    =>
+Adobe Refresh Manager                                                       1.8.0            Adobe Systems Incorporated 20200927    =>
+Adobe Acrobat Reader DC - Nederlands                                        20.013.20064     Adobe Systems Incorporated 20201105    =>
+Silicon Laboratories CP210x VCP Drivers for Windows XP/2003 Server/Vista/7  6.2.00           Silicon Laboratories, Inc. 20181127    =>
+Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030               11.0.61030       Microsoft Corporation      20180503    =>
+Office 16 Click-to-Run Localization Component                               16.0.13328.20340 Microsoft Corporation      20201113    <=
+
+
+
 Press any key to continue . . .
 ```
 
