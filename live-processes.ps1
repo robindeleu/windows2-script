@@ -3,8 +3,6 @@ function Live-Processes {
     Write-Host "                Checking 'All live processes working'"
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
 
-    # This is just a simple CMDLET that makes that we can print out the processes and see the priority
-    # $A = Get-Process
-    # $A | Get-Process | Format-Table -View priority
-    Get-Process | Sort-Object -Property cpu -Descending | Select-Object -First 10
+    # This is just a simple CMDLET that makes that we can print out the processes sorted by CPU and display the first 10
+    Write-Host(Get-Process | Sort-Object -Property cpu -Descending | Select-Object -First 10| Out-String) 
 }

@@ -1,6 +1,9 @@
 function Shares {
-
+    # Here we make some variabeles to use to save the files
+    # Fill in the actual date of today here
     $compareDate = "11-11-2020"
+    # Fill in the id, 1 is for the first time running, 2 to make the compair object.
+    # You must run it 2 times to make that he can compaire
     $saveid="2"
     $logsDirectory = "logs"
     $referenceopbject = "./$logsDirectory/shares-11-11-2020-1.txt"
