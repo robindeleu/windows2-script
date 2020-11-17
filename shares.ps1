@@ -6,10 +6,12 @@ function Shares {
     # You must run it 2 times to make that he can compaire
     $saveid="2"
     $logsDirectory = "logs"
+    # Here set the path to the reference object
     $referenceopbject = "./$logsDirectory/shares-11-11-2020-1.txt"
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
     Write-Host "                Checking 'All shares'"
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    # Here we make a CMD let to display the share names, paths and description
     $checkshares = Get-SmbShare | Select-Object Name, Path, Description| Format-Table -AutoSize
     $checkshares
     #Dit is om op te slaan van alle shares op dit moment in een text file
