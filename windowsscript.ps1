@@ -39,9 +39,10 @@ do{
             RAM-Usage
             Disk-Usage
             Show-Event-Logs
-            #Installed-Programs
-            #Live-Processes
+            Installed-Programs
+            Live-Processes
             Users
+            Shares
         }
         '2' {
             CPU-Usage

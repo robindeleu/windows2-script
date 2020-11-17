@@ -1,5 +1,13 @@
 # Server health check
 
+## Usage
+
+Run the powershell script by typing in the terminal ".\windowsscript.ps1".
+
+```bash
+D:\VIVES\Vakken\Windows2\windows2-script [master]>.\windowsscript.ps1\
+```
+
 ## Menu
 
 Allows the user to choose for a full health check or a certain health check.
@@ -219,7 +227,28 @@ Press any key to continue . . .
 Shows the user, the first ten installed programs on the system along with the necessary info. And checks if it changed from the last time checked.
 
 ```bash
+------------------------------------------------------
+                Checking Installed Programs
+------------------------------------------------------
 
+
+DisplayName                    DisplayVersion  Publisher                  InstallDate
+-----------                    --------------  ---------                  -----------
+Visual Studio Community 2019   16.5.30011.22   Microsoft Corporation      20200511
+Adobe Digital Editions 4.5     4.5.11          Adobe Systems Incorporated
+Arduino                        1.8.9           Arduino LLC
+Audacity 2.3.3                 2.3.3           Audacity Team              20200423
+Battle.net                                     Blizzard Entertainment
+
+Visual Studio Build Tools 2017 15.9.28307.1300 Microsoft Corporation      20201113
+DB Browser for SQLite          3.10.1          DB Browser for SQLite Team
+Digilent Software              1.5.8           Digilent, Inc.
+Dream Aquarium
+
+
+
+saved in: ./logs/inst-prog-11-11-2020-1.txt
+Press any key to continue . . .
 ```
 
 ## Live Processes
@@ -227,7 +256,27 @@ Shows the user, the first ten installed programs on the system along with the ne
 Shows the user, the current live processes on the system.
 
 ```bash
+------------------------------------------------------
+                Checking 'All live processes working'
+------------------------------------------------------
 
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+   2287      20    38920      23792   5.423,05   3652   0 audiodg
+   2917    4928   427636     245868   1.492,64  14740  14 Teams
+   1181      35   245824     215556     864,53   3736  14 Teams
+    537      38   194620     193872     727,42  23192  14 Code
+   5147     171   271564     151952     709,36  18176  14 Dropbox
+    429      92   167036     183276     500,02  21888  14 Teams
+    503    1120     9740      17084     480,73  17244  14 SynTPEnh
+   1417      29   239640     121516     259,58  16332  14 chrome
+    528     148   329908     289296     259,55  16336  14 Teams
+    961      79    63952      60348     228,11   5916  14 steam
+
+
+
+Press any key to continue . . .
 ```
 
 ## Users
@@ -235,18 +284,18 @@ Shows the user, the current live processes on the system.
 Shows the user, the users on the system along with the necessary info. And checks if it changed from the last time checked.
 
 ```bash
-------------------------------------------------------   
+------------------------------------------------------
                 Checking Users
-------------------------------------------------------   
+------------------------------------------------------
 
 
 Name                PrincipalSource LastLogon           PasswordChangeableDate PasswordLastSet     Description
 ----                --------------- ---------           ---------------------- ---------------     -----------
 WDAGUtilityAccount            Local                     16/09/2018 21:37:06    16/09/2018 21:37:06 Een gebruikersaccount dat wordt beheerd en gebruik...
-Gast                          Local                                                                Ingebouwd account voor gasttoegang op de computer ... 
+Gast                          Local                                                                Ingebouwd account voor gasttoegang op de computer ...
 Tjoep                         Local 16/03/2020 13:01:38 16/03/2020 13:00:10    16/03/2020 13:00:10
-Administrator                 Local 6/12/2017 1:37:21                          18/03/2017 4:53:19  Ingebouwd account voor beheer van de computer of h... 
-DefaultAccount                Local                                                                Een gebruikersaccount dat wordt beheerd door het s... 
+Administrator                 Local 6/12/2017 1:37:21                          18/03/2017 4:53:19  Ingebouwd account voor beheer van de computer of h...
+DefaultAccount                Local                                                                Een gebruikersaccount dat wordt beheerd door het s...
 dhond              MicrosoftAccount                     16/03/2020 12:58:42    16/03/2020 12:58:42
 benja              MicrosoftAccount                     14/09/2018 19:21:13    14/09/2018 19:21:13
 mamam              MicrosoftAccount                     16/03/2020 12:58:42    16/03/2020 12:58:42
@@ -260,6 +309,33 @@ Number of Microsoft accounts:  3
 Files are the same
 ```
 
+## Shares
+
+Shows the user, the shares on the system and makes a backup.
+
+```bash
+------------------------------------------------------
+                Checking 'All shares'
+------------------------------------------------------
+
+
+Name     Path        Description
+----     ----        -----------
+ADMIN$   C:\WINDOWS  Extern beheer
+C$       C:\         Standaardshare
+D$       D:\         Standaardshare
+E$       E:\         Standaardshare
+IPC$                 Externe IPC
+SERVERS! D:\SERVERS!
+
+
+
+saved in: ./logs/shares-11-11-2020-2.txt
+Press any key to continue . . .
+```
+
 ## Elevated permissions
 
 Allows user to run powershell with elevated permissions. This is necessary for the script show-event-logs.ps1.
+
+## UML
