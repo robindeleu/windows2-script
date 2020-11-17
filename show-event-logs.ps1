@@ -24,7 +24,8 @@ function Show-Event-Logs {
         $securityEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
 
-    $securityEventList | Format-Table EventId, Count, Info
+    $securityEventListFormated = $securityEventList | Format-Table EventId, Count, Info
+    $securityEventListFormated
 
     # Leave a blank line after the last output
     Write-Host "`n"
@@ -51,7 +52,8 @@ function Show-Event-Logs {
         $systemEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
 
-    $systemEventList | Format-Table EventId, Count, Info
+    $systemEventListFormated = $systemEventList | Format-Table EventId, Count, Info
+    $systemEventListFormated
 
     # Leave a blank line after the last output
     Write-Host "`n"
@@ -59,7 +61,7 @@ function Show-Event-Logs {
 
 
     Write-Host "`n------------------------------------------------------" -ForegroundColor Yellow
-    Write-Host "             Checking Application Log                   "
+    Write-Host "             CHECKING APPLICATION LOG                   "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Yellow
 
     # Import hashtable of known application event id's
@@ -78,7 +80,8 @@ function Show-Event-Logs {
         $applicationEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
     
-    $applicationEventList | Format-Table EventId, Count, Info
+    $applicationEventListFormated = $applicationEventList | Format-Table EventId, Count, Info
+    $applicationEventListFormated
 
     # Leave a blank line after the last output
     Write-Host "`n"
@@ -93,29 +96,78 @@ function Show-Event-Logs {
     $date = Get-Date -format "dd-MM-yyyy"
     
     $systemFileLocation = "./$logsDirectory/logfile-system-$date.txt"
-    New-Item -Path $systemFileLocation -ItemType File
-    Out-File -inputobject $systemEventList -filepath $systemFileLocation
+    New-Item -Path $systemFileLocation -ItemType File -Force
+    Out-File -inputobject $systemEventListFormated -filepath $systemFileLocation -Force
     Write-Host "Log saved: $systemFileLocation"
 
     $securityFileLocation = "./$logsDirectory/logfile-security-$date.txt"
-    New-Item -Path $securityFileLocation -ItemType File
-    Out-File -inputobject $securityEventList -filepath $securityFileLocation
-    Write-Host "Log saved: $systemFileLocation"
+    New-Item -Path $securityFileLocation -ItemType File -Force
+    Out-File -inputobject $securityEventListFormated -filepath $securityFileLocation -Force
+    Write-Host "Log saved: $securityFileLocation"
 
     $applicationFileLocation = "./$logsDirectory/logfile-application-$date.txt"
-    New-Item -Path $applicationFileLocation -ItemType File
-    Out-File -inputobject $applicationEventList -filepath $applicationFileLocation
-    Write-Host "Log saved: $systemFileLocation"
+    New-Item -Path $applicationFileLocation -ItemType File -Force
+    Out-File -inputobject $applicationEventListFormated -filepath $applicationFileLocation -Force
+    Write-Host "Log saved: $applicationFileLocation"
 
 
 
-    # Write-Host "`n------------------------------------------------------" -ForegroundColor Green
-    # Write-Host "                    Comparing Logs                      "
-    # Write-Host "------------------------------------------------------`n" -ForegroundColor Green
-    # $comparesystemlog = "./$logsDirectory/logfile-system-$compareDate.txt"
-    # $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                    Comparing Logs                      "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    $comparesystemlog = "./$logsDirectory/logfile-system-$compareDate.txt"
+    $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
+    $comparesecuritylog = "./$logsDirectory/logfile-security-$compareDate.txt"
 
-    # Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
-    # Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
+    if (Test-Path -Path $comparesecuritylog) {
+        Write-Host "========> Comparing Security log (whats new in todays log)"
+        Write-Host "EventId  Count  Info"
+        $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
+        foreach ($item in $SecurityCompare) {
+            if ($item.sideindicator -eq '=>')
+            {
+                Write-Host $item.InputObject
+            }
+        }
+    } else {
+        Write-Host "========> No Security log to compare with"
+    }
+
+    # Leave a blank line after the last output
+    Write-Host "`n"
+
+    if (Test-Path -Path $comparesystemlog) {
+        Write-Host "========> Comparing System log"
+        Write-Host "EventId  Count  Info"
+        $SystemCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
+        foreach ($item in $SystemCompare) {
+            if ($item.sideindicator -eq '=>')
+            {
+                Write-Host $item.InputObject
+            }
+        }
+    } else {
+        Write-Host "========> No System log to compare with"
+    }
+
+    # Leave a blank line after the last output
+    Write-Host "`n"
+
+    if (Test-Path -Path $compareapplicationlog) {
+        Write-Host "========> Comparing Application log"
+        Write-Host "EventId  Count  Info"
+        $ApplicationCompare = Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
+        foreach ($item in $ApplicationCompare) {
+            if ($item.sideindicator -eq '=>')
+            {
+                Write-Host $item.InputObject
+            }
+        }
+    } else {
+        Write-Host "========> No Application log to compare with"
+    }
+    
+    # Leave a blank line after the last output
+    Write-Host "`n"
 
 }
