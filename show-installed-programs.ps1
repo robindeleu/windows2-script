@@ -1,31 +1,28 @@
 function Installed-Programs {
+    # Here we make some variabeles to use to save the files
+    # Fill in the actual date of today here
     $compareDate = "11-11-2020"
+    # Fill in the id, 1 is for the first time running, 2 to make the compair object.
+    # You must run it 2 times to make that he can compaire
     $saveid="2"
     $logsDirectory = "logs"
+    # Here set the path to the reference object
     $referenceopbject = "./$logsDirectory/inst-prog-11-11-2020-1.txt"
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
     Write-Host "                Checking Installed Programs                           "
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+    # Here we make a variable to display the first 10 programs that are installed
     $console =  Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate -first 10| Format-Table -AutoSize
     $console 
+    # Here we make a variablefor all programs that are installed
     $data = Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table -AutoSize
 
+    # This part is to save all programs in to a txt file
     $sharesave = "./$logsDirectory/inst-prog-$compareDate-$saveid.txt"
     New-Item -Path $sharesave -ItemType File -Force
     Out-File -inputobject $data -filepath $sharesave -Force
     Write-Host "saved in: $sharesave"
-
+    # This part is to compaire with befor and after
     Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)
-    #DIT DEEL WERKT NOG NIET
-    # voor het opslaan van dit bestand:
-    #$storelocation= D:\Users\deleu\Documents\VIVES\Fase 3\Windows2\windows2-script\script-befor.txt
- 
-
-    #Als je wil vergelijken voor en na
     
-    #$befor = C:\Users\deleu\Documents\InstalledPrograms-PS-befor.txt
-    #$after = C:\Users\deleu\Documents\InstalledPrograms-PS-after.txt
-    
-    #Compare-Object -ReferenceObject (Get-Content D:\Users\deleu\Documents\VIVES\powershell.txt) -DifferenceObject (Get-Content D:\Users\deleu\Documents\VIVES\powershell1.txt)
-
 }

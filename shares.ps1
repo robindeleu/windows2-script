@@ -14,12 +14,12 @@ function Shares {
     # Here we make a CMD let to display the share names, paths and description
     $checkshares = Get-SmbShare | Select-Object Name, Path, Description| Format-Table -AutoSize
     $checkshares
-    #Dit is om op te slaan van alle shares op dit moment in een text file
+    # This part is to save all programs in to a txt file
     $sharesave = "./$logsDirectory/shares-$compareDate-$saveid.txt"
     New-Item -Path $sharesave -ItemType File -Force
     Out-File -inputobject $checkshares -filepath $sharesave -Force
     Write-Host "saved in: $sharesave"
-    #$checkshares > D:\Users\deleu\Documents\VIVES\powershell1.txt
-    #Dit is om te vergelijken tussen oud en nieuw
+    
+    # this part is to compaire with befor and after
     Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)
 }
