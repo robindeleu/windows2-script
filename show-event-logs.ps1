@@ -2,7 +2,8 @@ function Show-Event-Logs {
     # Date format has to be dd-mm-yyyy
     $compareDate = "11-11-2020"
     $logsDirectory = "logs"
-    $Begin = Get-Date -Date '11/11/2020 08:00:00'
+    $Begin = Get-Date -Date '12/11/2020 00:00:00'
+    $End = Get-Date -Date '12/11/2020 23:59:59'
     
     Write-Host "`n------------------------------------------------------" -ForegroundColor Yellow
     Write-Host "                CHECKING SECURITY LOG                   "
@@ -13,7 +14,7 @@ function Show-Event-Logs {
 
     # GROUP ALL SECURITY LOG ENTRIES BY EVENT ID
     # AND PRINT OUT THE AMOUNTS FOR EVENT IDs OF INTEREST
-    $securityEventsSummary = Get-Eventlog -Logname Security -After $Begin | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
+    $securityEventsSummary = Get-Eventlog -Logname Security -After $Begin -Before $End | Group-Object -property EventID | Sort-Object -Property Count -Descending
     $securityEventList = @()
 
     foreach ($event in $securityEventsSummary) {
@@ -24,7 +25,7 @@ function Show-Event-Logs {
         $securityEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
 
-    $securityEventListFormated = $securityEventList | Format-Table EventId, Count, Info
+    $securityEventListFormated = $securityEventList | Format-Table EventId, Info
     $securityEventListFormated
 
     # Leave a blank line after the last output
@@ -41,7 +42,7 @@ function Show-Event-Logs {
 
     # GROUP ALL SECURITY LOG ENTRIES BY EVENT ID
     # AND PRINT OUT THE AMOUNTS FOR EVENT IDs OF INTEREST
-    $systemEventsSummary = Get-Eventlog -Logname System -After $Begin | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
+    $systemEventsSummary = Get-Eventlog -Logname System -After $Begin -Before $End | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
     $systemEventList = @()
 
     foreach ($event in $systemEventsSummary) {
@@ -52,7 +53,7 @@ function Show-Event-Logs {
         $systemEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
 
-    $systemEventListFormated = $systemEventList | Format-Table EventId, Count, Info
+    $systemEventListFormated = $systemEventList | Format-Table EventId, Info
     $systemEventListFormated
 
     # Leave a blank line after the last output
@@ -69,7 +70,7 @@ function Show-Event-Logs {
 
     # GROUP ALL APPLICATION LOG ENTRIES BY EVENT ID
     # AND PRINT OUT THE AMOUNTS FOR EVENT IDs OF INTEREST
-    $applicationEventsSummary = Get-Eventlog -Logname Application -After $Begin | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
+    $applicationEventsSummary = Get-Eventlog -Logname Application -After $Begin -Before $End | where {($_.EntryType -NotMatch "Information")}  | Group-Object -property EventID | Sort-Object -Property Count -Descending
     $applicationEventList = @()
 
     foreach ($event in $applicationEventsSummary) {
@@ -80,7 +81,7 @@ function Show-Event-Logs {
         $applicationEventList += [pscustomobject]@{EventId = $eventId; Info = $info; Count = $amount}
     }
     
-    $applicationEventListFormated = $applicationEventList | Format-Table EventId, Count, Info
+    $applicationEventListFormated = $applicationEventList | Format-Table EventId, Info
     $applicationEventListFormated
 
     # Leave a blank line after the last output
@@ -119,26 +120,9 @@ function Show-Event-Logs {
     $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
     $comparesecuritylog = "./$logsDirectory/logfile-security-$compareDate.txt"
 
-    if (Test-Path -Path $comparesecuritylog) {
-        Write-Host "========> Comparing Security log (whats new in todays log)"
-        Write-Host "EventId  Count  Info"
-        $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
-        foreach ($item in $SecurityCompare) {
-            if ($item.sideindicator -eq '=>')
-            {
-                Write-Host $item.InputObject
-            }
-        }
-    } else {
-        Write-Host "========> No Security log to compare with"
-    }
-
-    # Leave a blank line after the last output
-    Write-Host "`n"
-
     if (Test-Path -Path $comparesystemlog) {
-        Write-Host "========> Comparing System log"
-        Write-Host "EventId  Count  Info"
+        Write-Host "========> Comparing System log (whats new in todays log)"
+        Write-Host "EventId   Info"
         $SystemCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
         foreach ($item in $SystemCompare) {
             if ($item.sideindicator -eq '=>')
@@ -154,8 +138,8 @@ function Show-Event-Logs {
     Write-Host "`n"
 
     if (Test-Path -Path $compareapplicationlog) {
-        Write-Host "========> Comparing Application log"
-        Write-Host "EventId  Count  Info"
+        Write-Host "========> Comparing Application log (whats new in todays log)"
+        Write-Host "EventId   Info"
         $ApplicationCompare = Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
         foreach ($item in $ApplicationCompare) {
             if ($item.sideindicator -eq '=>')
@@ -167,6 +151,23 @@ function Show-Event-Logs {
         Write-Host "========> No Application log to compare with"
     }
     
+    # Leave a blank line after the last output
+    Write-Host "`n"
+
+    if (Test-Path -Path $comparesecuritylog) {
+        Write-Host "========> Comparing Security log (whats new in todays log)"
+        Write-Host "EventId   Info"
+        $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
+        foreach ($item in $SecurityCompare) {
+            if ($item.sideindicator -eq '=>')
+            {
+                Write-Host $item.InputObject
+            }
+        }
+    } else {
+        Write-Host "========> No Security log to compare with"
+    }
+
     # Leave a blank line after the last output
     Write-Host "`n"
 
