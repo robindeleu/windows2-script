@@ -21,5 +21,5 @@ function Shares {
     Write-Host "saved in: $sharesave"
     
     # this part is to compaire with befor and after
-    Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)
+    Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)|Out-String)
 }
