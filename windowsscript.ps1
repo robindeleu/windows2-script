@@ -7,6 +7,7 @@
 . .\show-installed-programs.ps1
 . .\users.ps1
 . .\run-with-elevated-permissions.ps1
+. .\shares.ps1
 
 function Show-Menu {
     param (
@@ -23,7 +24,8 @@ function Show-Menu {
     Write-Host "6: Show Installed Programs"
     Write-Host "7: Show Live Processes"
     Write-Host "8: Show Users"
-    Write-Host "9: Open current directory with elevated permissions"
+    Write-Host "9: Show Shares"
+    Write-Host "10: Open current directory with elevated permissions"
     Write-Host "Q: Quit"
 }
 
@@ -54,15 +56,18 @@ do{
             Show-Event-Logs
         }
         '6' {
-            #Installed-Programs
+            Installed-Programs
         }
         '7' {
-            #Live-Processes
+            Live-Processes
         }
         '8' {
             Users
         }
         '9' {
+            Shares
+        }
+        '10'{
             Run-Elevated
         }
     }

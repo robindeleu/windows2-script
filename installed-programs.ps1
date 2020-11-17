@@ -1,4 +1,4 @@
-function Installed-Programs {
+function Installed-Programs-working {
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
     Write-Host "                Checking 'All installed programs working'"
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
