@@ -1,6 +1,6 @@
 function Installed-Programs {
     $compareDate = "11-11-2020"
-    $saveid="2"
+    $saveid="1"
     $logsDirectory = "logs"
     $referenceopbject = "./$logsDirectory/inst-prog-11-11-2020-1.txt"
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
