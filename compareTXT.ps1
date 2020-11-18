@@ -4,9 +4,14 @@ function CompareTXT {
         [string]$textAfter
     )
 
-    foreach($line in Get-Content $textBefore) {
-        foreach($line2 in Get-Content $textAfter) {
-            $line -match $line2
+    $File1 = Get-Content $textBefore | Foreach {$_.TrimEnd()}
+    $File2 = Get-Content $textAfter | Foreach {$_.TrimEnd()}
+
+    ForEach ($line in $File2)
+    {
+        If (!($File1 -contains $line))
+        {
+            Write-Output "$Line"
         }
     }
 }

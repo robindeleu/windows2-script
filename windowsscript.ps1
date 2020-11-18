@@ -79,7 +79,7 @@ do{
             Run-Elevated
         }
         '12'{
-            CompareTXT -textBefore "./logs/usersbefore.txt" -textAfter "./logs/usersafter.txt"
+            CompareTXT -textBefore "./serverlogs/before/logfile-security-11-11-2020.txt" -textAfter "./serverlogs/after/logfile-security-17-11-2020.txt"
         }
     }
  cmd /c pause
