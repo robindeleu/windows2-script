@@ -4,7 +4,7 @@ function Live-Processes {
     $compareDate = "11-11-2020"
     # Fill in the id, 1 is for the first time running, 2 to make the compair object.
     # You must run it 2 times to make that he can compaire
-    $saveid="2"
+    $saveid="1"
     $logsDirectory = "logs"
     # Here set the path to the reference object
     $referenceopbject = "./$logsDirectory/proc-11-11-2020-1.txt"
