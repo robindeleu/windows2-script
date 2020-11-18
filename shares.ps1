@@ -1,3 +1,4 @@
+. .\compareTXT.ps1
 function Shares {
     # Here we make some variabeles to use to save the files
     # Fill in the actual date of today here
@@ -21,6 +22,11 @@ function Shares {
     Write-Host "saved in: $sharesave"
     
     # this part is to compaire with befor and after
-    $output = Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave) | Out-String
-    Write-Host $output
+    # $output = Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave) | Out-String
+    # Write-Host $output
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                difference's "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+
+    Write-Host(CompareTXT -textBefore $referenceopbject -textAfter $sharesave| Out-String) 
 }
