@@ -35,14 +35,37 @@ do{
     switch ($selection)
     {
         '1' {
-            CPU-Usage
-            RAM-Usage
-            Disk-Usage
-            Show-Event-Logs
-            Installed-Programs
-            Live-Processes
-            Users
-            Shares
+            $title = "<h2>Server Health Check</h2>"
+            $cpu = CPU-Usage
+            $ram = RAM-Usage
+            $disks = Disk-Usage
+            # Show-Event-Logs
+            # Installed-Programs
+            # Live-Processes
+            $users = Get-LocalUser | ConvertTo-Html -Property FullName, Name
+            $shares = Get-SmbShare | ConvertTo-Html -Property Name, Path
+
+            $htmlpage = "<h1>$title</h1>
+                        <table>
+                            <tr>
+                                <th>CPU Usage</th>
+                                <th>RAM Usage</th>
+                            </tr>
+                            <tr>
+                                <td>$cpu</td>
+                                <td>$ram</td>
+                            </tr>
+                        </table>
+
+                        <h3>Installed disks and usage</h3>
+                        <p>$disks</p>
+
+                        <h3>Current users</h3>
+                        <p>$users</p>
+
+                        <h3>Shares</h3>
+                        <p>$shares</p>"
+            ConvertTo-Html -CssUri "style.css" -Body $htmlpage -Title "Server Health Check" | Out-File healthcheck.html
         }
         '2' {
             CPU-Usage

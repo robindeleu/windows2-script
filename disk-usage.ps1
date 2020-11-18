@@ -16,6 +16,8 @@ function Disk-Usage {
     # This part makes that we can print out the table that print out the name, total capacity, free space in GB and %
     # Sort by Free space in percent 
     $data =Get-WmiObject -namespace "root/cimv2" -query "SELECT Name, Capacity, FreeSpace FROM Win32_Volume WHERE Capacity > 0 and (DriveType = 2 OR DriveType = 3)" |
-    Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending | Out-String
-    Write-Host($data)
+    Select-Object -Property Name, $TCapacity, $Freespace, $PercentFree  | Sort-Object 'Free (%)' -Descending
+    Write-Host($data | Out-String)
+    $htmldata = $data | ConvertTo-Html -Property Name, "Total Capacity (GB)", "Free Space (GB)"
+    return $htmldata 
 }
