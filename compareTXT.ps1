@@ -6,7 +6,11 @@ function CompareTXT {
 
     foreach($line in Get-Content $textBefore) {
         foreach($line2 in Get-Content $textAfter) {
-            $line -match $line2
+            if($line -like $line2){
+                write-host($line -like $line2)
+                get-content $line
+            }
+
         }
     }
 }
