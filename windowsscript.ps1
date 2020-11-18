@@ -8,6 +8,8 @@
 . .\users.ps1
 . .\run-with-elevated-permissions.ps1
 . .\shares.ps1
+. .\services.ps1
+. .\compareTXT.ps1
 
 function Show-Menu {
     param (
@@ -25,7 +27,8 @@ function Show-Menu {
     Write-Host "7: Show Live Processes"
     Write-Host "8: Show Users"
     Write-Host "9: Show Shares"
-    Write-Host "10: Open current directory with elevated permissions"
+    Write-Host "10: Show Services"
+    Write-Host "11: Open current directory with elevated permissions"
     Write-Host "Q: Quit"
 }
 
@@ -91,8 +94,14 @@ do{
         '9' {
             Shares
         }
-        '10'{
+        '10' {
+            Show-Services
+        }
+        '11'{
             Run-Elevated
+        }
+        '12'{
+            CompareTXT -textBefore "./serverlogs/before/logfile-security-11-11-2020.txt" -textAfter "./serverlogs/after/logfile-security-17-11-2020.txt"
         }
     }
  cmd /c pause
