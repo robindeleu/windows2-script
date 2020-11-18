@@ -18,6 +18,8 @@ function Live-Processes {
     New-Item -Path $procsave -ItemType File -Force
     Out-File -inputobject $data -filepath $procsave -Force
     Write-Host "saved in: $procsave"
-    Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $procsave)|Out-String)
+    Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $procsave) |Out-String)
+
+
 
 }

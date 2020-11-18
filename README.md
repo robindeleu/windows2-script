@@ -244,7 +244,19 @@ Press any key to continue . . .
 
 Shows the user, the first ten installed programs on the system along with the necessary info. And checks if it changed from the last time checked.
 
-Beware, if you want to compair
+Beware, if you want to compair you must to edit a variable in the script like.
+
+```powershell
+$compareDate = "11-11-2020"
+# Fill in the id, 1 is for the first time running, 2 to make the compair object.
+# You must run it 2 times to make that he can compaire (befor with $saveid="1" and aftera suspected attack with $saveid="2")
+$saveid="2"
+# Underneed you can change the 
+$logsDirectory = "logs"
+# Here set the path to the reference object
+$referenceopbject = "./$logsDirectory/inst-prog-11-11-2020-1.txt" 
+
+```
 
 ```bash
 ------------------------------------------------------
