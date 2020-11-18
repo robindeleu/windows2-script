@@ -9,6 +9,7 @@
 . .\run-with-elevated-permissions.ps1
 . .\shares.ps1
 . .\services.ps1
+. .\compareTXT.ps1
 
 function Show-Menu {
     param (
@@ -76,6 +77,9 @@ do{
         }
         '11'{
             Run-Elevated
+        }
+        '12'{
+            CompareTXT -textBefore "./logs/usersbefore.txt" -textAfter "./logs/usersafter.txt"
         }
     }
  cmd /c pause
