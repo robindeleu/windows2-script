@@ -713,4 +713,8 @@ Running  ClipSVC            Client License Service (ClipSVC)       <=
 
 Allows user to run powershell with elevated permissions. This is necessary for the script show-event-logs.ps1.
 
+## Compare
+
+A script that compares two txt files and outputs the difference.
+
 ## UML

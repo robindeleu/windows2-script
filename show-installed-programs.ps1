@@ -1,3 +1,4 @@
+. .\compareTXT.ps1
 function Installed-Programs {
     # Here we make some variabeles to use to save the files
     # Fill in the actual date of today here
@@ -23,6 +24,10 @@ function Installed-Programs {
     Out-File -inputobject $data -filepath $sharesave -Force
     Write-Host "saved in: $sharesave"
     # This part is to compaire with befor and after
-    Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)|Out-String)
-    
+    # Write-Host(Compare-Object -ReferenceObject (Get-Content -Path $referenceopbject) -DifferenceObject (Get-Content -Path $sharesave)|Out-String)
+    Write-Host "`n------------------------------------------------------" -ForegroundColor Green
+    Write-Host "                difference's "
+    Write-Host "------------------------------------------------------`n" -ForegroundColor Green
+
+    Write-Host(CompareTXT -textBefore $referenceopbject -textAfter $sharesave| Out-String) 
 }

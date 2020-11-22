@@ -1,3 +1,4 @@
+. .\compareTXT.ps1
 function Show-Services {
     # Added Title
     Write-Host "`n------------------------------------------------------" -ForegroundColor Green
@@ -33,16 +34,16 @@ function Show-Services {
     # Store current data to a text file for comparison
     Get-Service | Sort-Object Status > $fileAfter
 
-    # Compare the current data with the previous data, if data is different user sees what the differences are
-    Write-host(Compare-Object -ReferenceObject (Get-Content -Path $fileBefore) -DifferenceObject (Get-Content -Path $fileAfter)|Out-String)
-
     # If the files are the same (no change) then it will show the user "Files are the same" otherwise the opposite
     if(Compare-Object -ReferenceObject (Get-Content $fileBefore) -DifferenceObject (Get-Content $fileAfter)) {
         Write-Host "Files are different"
     }
     else {
-        Write-Host  "Files are the same"
+        Write-Host  "Files are the same`n"
     }
+
+    # Compare the current data with the previous data, if data is different user sees what the differences are
+    CompareTXT -textBefore $fileBefore -textAfter $fileAfter
 
     # Add previous data to a backupfile along with the date for easy search
     $Date = Get-Date -Format "dddd MM/dd/yyyy HH:mm K"
