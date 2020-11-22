@@ -53,4 +53,5 @@ function Show-Services {
     
     # Store current data as the previous data for future use
     Get-Service | Sort-Object Status > $fileBefore
+
 }

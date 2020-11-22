@@ -42,13 +42,9 @@ do{
             $cpu = CPU-Usage
             $ram = RAM-Usage
             $disks = Disk-Usage
-            $eventlogs =  Show-Event-Logs
-            $htmleventlogs = ""
-            foreach ($item in $eventlogs) {
-                $htmleventlogs += $item
-            }
-            # Installed-Programs
-            # Live-Processes
+            $installedprogs = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | select DisplayName, Publisher, InstallDate | ConvertTo-Html
+            $services =  Get-Service | select Name, Status | ConvertTo-Html
+            $proces = Get-Process | select Name, Path, Company, CPU | Sort-Object -Property CPU -Descending | Select-Object -First 10 | ConvertTo-Html
             $users = Get-LocalUser | ConvertTo-Html -Property Name, Fullname, LastLogon, PasswordLastSet
             $shares = Get-SmbShare | ConvertTo-Html -Property Name, Path, Description
 
@@ -56,8 +52,7 @@ do{
                         <style>
                         body { font-family: arial; text-align: left; }
                         table { width: 60%; }
-                        table th { padding: 4px; }
-                        div { background-color: lightblue; width: 60%; padding: 4px;}
+                        div { background-color: lightblue; width: 60%; }
                         </style>"
 
             $htmlpage = "<h1 style='font-family: arial;'>$title</h1>
@@ -80,10 +75,18 @@ do{
 
                         <div><h3>Shares</h3></div>
                         <p>$shares</p>
-                        
-                        <div><h3>Event logs</h3></div>
-                        <p>$htmleventlogs</p>"
+
+                        <div><h3>10 most CPU intensive processes</h3></div>
+                        <p>$proces</p>
+
+                        <div><h3>Installed programs</h3></div>
+                        <p>$installedprogs</p>
+
+                        <div><h3>Services</h3></div>
+                        <p>$services</p>
+                        "
             ConvertTo-Html -Head $head -Body $htmlpage -Title "$title" | Out-File healthcheck.html | Start-Process "healthcheck.html"
+            
         }
         '2' {
             CPU-Usage
