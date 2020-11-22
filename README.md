@@ -2,21 +2,21 @@
 
 [![made-for-VSCode](https://img.shields.io/badge/Made%20for-Powershell-1f425f.svg)](https://code.visualstudio.com/)
 
-## Usage
+## How to use this script
 
-Run the powershell script by typing in the terminal ".\windowsscript.ps1".
-
-```bash
-D:\VIVES\Vakken\Windows2\windows2-script [master]>.\windowsscript.ps1\
-```
+The powershell script to launch is 'windowsscript.ps1'.
+Either right click it and select 'launch with powershell' or use the command line to go to the scripts location and launch the script by typing ".\windowsscript.ps1".
+For some functions it is necessary to launch the script with elevated permissions.
+You can select menu option 11 'Open current directory with elevated permissions' to do exactly that, and launch the script from there.
 
 ## Menu
 
-Allows the user to choose for a full health check or a certain health check.
+Once you launched ".\windowsscript.ps1" you wil be greeted by this menu.
+Select  the function you want to use by typing the number next to it and hitting 'return'.
 
 ```bash
 ================ Powershell health check ================
-1: Perform Full health check
+1: Healthcheck (full) with HTML output
 2: Check CPU-usage
 3: Check RAM-usage
 4: Check Disk-usage
@@ -28,7 +28,7 @@ Allows the user to choose for a full health check or a certain health check.
 10: Show Services
 11: Open current directory with elevated permissions
 Q: Quit
-Please make a selection:
+Please make a selection:   
 ```
 
 ## CPU-usage
@@ -54,10 +54,6 @@ chrome       1.36%
 audiodg      1.36% 
 code         1.16% 
 skype        0.78% 
-
-
-
-Press any key to continue . . . 
 ```
 
 ## RAM-usage
@@ -88,9 +84,6 @@ Used Memory(Mb) ProcessName
             135 cavwp
             117 Teams
             107 explorer
-
-
-Press any key to continue . . .
 ```
 
 ## Disk-usage
@@ -111,9 +104,6 @@ D:\                                                            914,89          5
 E:\                                                             16,62            1,96       12
 C:\                                                            118,01            6,82        6
 
-
-
-Press any key to continue . . .
 ```
 
 ## Event logs
@@ -124,7 +114,6 @@ Shows the user, the logs of events happened on the system and counts them by id.
 ------------------------------------------------------
                 CHECKING SECURITY LOG
 ------------------------------------------------------
-
 
 EventId Count Info
 ------- ----- ----
@@ -157,14 +146,9 @@ EventId Count Info
    6281     2 Code Integrity determined that the page hashes of an image file are not valid...
    4616     1 The system time was changed.
 
-
-
-
-
 ------------------------------------------------------
                  CHECKING SYSTEM LOG
 ------------------------------------------------------
-
 
 EventId Count Info
 ------- ----- ----
@@ -188,13 +172,9 @@ EventId Count Info
   10400     1 No description
 
 
-
-
-
 ------------------------------------------------------
              CHECKING APPLICATION LOG
 ------------------------------------------------------
-
 
 EventId Count Info
 ------- ----- ----
@@ -214,14 +194,9 @@ EventId Count Info
    1002     1 No description
 
 
-
-
-
 ------------------------------------------------------
                     Saving Logs
 ------------------------------------------------------
-
-
 Log saved: ./logs/logfile-system-17-11-2020.txt
 Log saved: ./logs/logfile-security-17-11-2020.txt
 Log saved: ./logs/logfile-application-17-11-2020.txt
@@ -229,16 +204,9 @@ Log saved: ./logs/logfile-application-17-11-2020.txt
 ------------------------------------------------------
                     Comparing Logs
 ------------------------------------------------------
-
 ========> No Security log to compare with
-
-
 ========> No System log to compare with
-
-
 ========> No Application log to compare with
-
-
 Press any key to continue . . .
 ```
 
@@ -280,10 +248,6 @@ Adobe Acrobat Reader DC - Nederlands                                        20.0
 Silicon Laboratories CP210x VCP Drivers for Windows XP/2003 Server/Vista/7  6.2.00           Silicon Laboratories, Inc. 20181127    =>
 Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030               11.0.61030       Microsoft Corporation      20180503    =>
 Office 16 Click-to-Run Localization Component                               16.0.13328.20340 Microsoft Corporation      20201113    <=
-
-
-
-Press any key to continue . . .
 ```
 
 ## Live Processes
@@ -308,10 +272,6 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
    1417      29   239640     121516     259,58  16332  14 chrome
     528     148   329908     289296     259,55  16336  14 Teams
     961      79    63952      60348     228,11   5916  14 steam
-
-
-
-Press any key to continue . . .
 ```
 
 ## Users
@@ -366,7 +326,6 @@ SERVERS! D:\SERVERS!
 
 
 saved in: ./logs/shares-11-11-2020-2.txt
-Press any key to continue . . .
 ```
 
 ## Services
