@@ -1,11 +1,38 @@
 . .\compareTXT.ps1
 
 function Show-Event-Logs {
-    # Date format has to be dd-mm-yyyy
-    $compareDate = "11-11-2020"
-    $logsDirectory = "logs"
-    $Begin = Get-Date -Date '12/11/2020 00:00:00'
-    $End = Get-Date -Date '12/11/2020 23:59:59'
+
+    #######################################################
+    #       Function to show and compare event logs       #
+    #=====================================================#
+
+    # Windows logs that are checked: Security, Application, System.
+
+    # For each log event-id's are counted and a list is stored in in the logs directory (specified below: $logsDirectory)
+    # These are stored with a timestamp with the current date.
+
+    # After that a comparison is made between the file with the date specified below ($compareDate)
+    # and the newly created file.
+
+    #-----------------------------------------------------#
+    #    Choose  data of  logfile to compare with         #
+    #-----------------------------------------------------#
+        $compareDate = "11-11-2020"  # Date format: dd-mm-yyyy
+    
+    #-----------------------------------------------------#
+    #   Specify  directory where logfiles are stored      #
+    #-----------------------------------------------------#
+        $logsDirectory = "logs"
+
+    #-----------------------------------------------------#
+    #   Specify start- and end-date for logs to check     #
+    #-----------------------------------------------------#
+        $Begin = Get-Date -Date '12/11/2020 00:00:00'
+        $End = Get-Date -Date '12/11/2020 23:59:59'
+
+
+
+    ################# START OF FUNCTION ###################
     
     Write-Host "`n------------------------------------------------------" -ForegroundColor Yellow
     Write-Host "                CHECKING SECURITY LOG                   "
@@ -122,22 +149,17 @@ function Show-Event-Logs {
     $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
     $comparesecuritylog = "./$logsDirectory/logfile-security-$compareDate.txt"
 
-    $differenceOutput = @()
-    $divider = "EventId Info`n---------------------------------------------------------------"
-
     if (Test-Path -Path $comparesystemlog) {
-        $title = "========> Comparing System log (whats new in todays log)"
-        Write-Host $title
-        $differenceOutput += $title | ConvertTo-Html
-        $differenceOutput += $divider | ConvertTo-Html
-
-        Write-Host "Compare this file: $comparesystemlog"
-        Write-host "With this file : $systemFileLocation"
+        Write-Host "---------------------------------------------------------------"
+        Write-Host "========> Comparing System log (whats new in todays log)"
+        Write-Host "---------------------------------------------------------------"
+        Write-Host "  Compare this file: $comparesystemlog"
+        Write-host "  With this file : $systemFileLocation"
+        Write-Host "---------------------------------------------------------------"
         Write-Host "EventId Info"
         Write-Host "---------------------------------------------------------------"
         $systemdiff = CompareTXT -textBefore $comparesystemlog -textAfter $systemFileLocation
         Write-Host $systemdiff
-        $differenceOutput += $systemdiff | ConvertTo-Html
     } else {
         Write-Host "========> No System log to compare with"
     }
@@ -146,9 +168,12 @@ function Show-Event-Logs {
     Write-Host "`n"
 
     if (Test-Path -Path $compareapplicationlog) {
+        Write-Host "---------------------------------------------------------------"
         Write-Host "========> Comparing Application log (whats new in todays log)"
+        Write-Host "---------------------------------------------------------------"
         Write-Host "Compare this file: $compareapplicationlog"
         Write-host "With this file : $applicationFileLocation"
+        Write-Host "---------------------------------------------------------------"
         Write-Host "EventId Info"
         Write-Host "---------------------------------------------------------------"
         $applicationdiff = CompareTXT -textBefore $compareapplicationlog -textAfter $applicationFileLocation
@@ -161,9 +186,12 @@ function Show-Event-Logs {
     Write-Host "`n"
 
     if (Test-Path -Path $comparesecuritylog) {
+        Write-Host "---------------------------------------------------------------"
         Write-Host "========> Comparing Security log (whats new in todays log)"
+        Write-Host "---------------------------------------------------------------"
         Write-Host "Compare this file: $comparesecuritylog"
         Write-host "With this file : $securityFileLocation"
+        Write-Host "---------------------------------------------------------------"
         Write-Host "EventId  Info"
         Write-Host "---------------------------------------------------------------"
         $securitydiff = CompareTXT -textBefore $comparesecuritylog -textAfter $securityFileLocation
@@ -174,13 +202,4 @@ function Show-Event-Logs {
 
     # Leave a blank line after the last output
     Write-Host "`n"
-
-    # $output = @()
-    # foreach ($item in $differenceOutput) {
-    #     $output += $item | ConvertTo-Html
-    # }
-
-    # $output = $output | ConvertTo-Html
-
-    return $differenceOutput
 }
