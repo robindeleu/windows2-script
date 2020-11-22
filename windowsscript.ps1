@@ -38,19 +38,31 @@ do{
     switch ($selection)
     {
         '1' {
-            $title = "<h2>Server Health Check</h2>"
+            $title = "Server Health Check"
             $cpu = CPU-Usage
             $ram = RAM-Usage
             $disks = Disk-Usage
-            # Show-Event-Logs
+            $eventlogs =  Show-Event-Logs
+            $htmleventlogs = ""
+            foreach ($item in $eventlogs) {
+                $htmleventlogs += $item
+            }
             # Installed-Programs
             # Live-Processes
-            $users = Get-LocalUser | ConvertTo-Html -Property FullName, Name
-            $shares = Get-SmbShare | ConvertTo-Html -Property Name, Path
+            $users = Get-LocalUser | ConvertTo-Html -Property Name, Fullname, LastLogon, PasswordLastSet
+            $shares = Get-SmbShare | ConvertTo-Html -Property Name, Path, Description
 
-            $htmlpage = "<h1>$title</h1>
-                        <table>
-                            <tr>
+            $head =     "<title>$title</title>
+                        <style>
+                        body { font-family: arial; text-align: left; }
+                        table { width: 60%; }
+                        table th { padding: 4px; }
+                        div { background-color: lightblue; width: 60%; padding: 4px;}
+                        </style>"
+
+            $htmlpage = "<h1 style='font-family: arial;'>$title</h1>
+                        <table style='font-family: arial; text-align: left; width: 60%;'>
+                            <tr style='background-color: lightblue;'>
                                 <th>CPU Usage</th>
                                 <th>RAM Usage</th>
                             </tr>
@@ -60,15 +72,18 @@ do{
                             </tr>
                         </table>
 
-                        <h3>Installed disks and usage</h3>
+                        <div><h3>Installed disks and usage</h3></div>
                         <p>$disks</p>
 
-                        <h3>Current users</h3>
+                        <div><h3>Current users</h3></div>
                         <p>$users</p>
 
-                        <h3>Shares</h3>
-                        <p>$shares</p>"
-            ConvertTo-Html -CssUri "style.css" -Body $htmlpage -Title "Server Health Check" | Out-File healthcheck.html
+                        <div><h3>Shares</h3></div>
+                        <p>$shares</p>
+                        
+                        <div><h3>Event logs</h3></div>
+                        <p>$htmleventlogs</p>"
+            ConvertTo-Html -Head $head -Body $htmlpage -Title "$title" | Out-File healthcheck.html | Start-Process "healthcheck.html"
         }
         '2' {
             CPU-Usage

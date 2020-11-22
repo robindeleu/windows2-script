@@ -122,13 +122,22 @@ function Show-Event-Logs {
     $compareapplicationlog = "./$logsDirectory/logfile-application-$compareDate.txt"
     $comparesecuritylog = "./$logsDirectory/logfile-security-$compareDate.txt"
 
+    $differenceOutput = @()
+    $divider = "EventId Info`n---------------------------------------------------------------"
+
     if (Test-Path -Path $comparesystemlog) {
-        Write-Host "========> Comparing System log (whats new in todays log)"
+        $title = "========> Comparing System log (whats new in todays log)"
+        Write-Host $title
+        $differenceOutput += $title | ConvertTo-Html
+        $differenceOutput += $divider | ConvertTo-Html
+
         Write-Host "Compare this file: $comparesystemlog"
         Write-host "With this file : $systemFileLocation"
         Write-Host "EventId Info"
         Write-Host "---------------------------------------------------------------"
-        CompareTXT -textBefore $comparesystemlog -textAfter $systemFileLocation
+        $systemdiff = CompareTXT -textBefore $comparesystemlog -textAfter $systemFileLocation
+        Write-Host $systemdiff
+        $differenceOutput += $systemdiff | ConvertTo-Html
     } else {
         Write-Host "========> No System log to compare with"
     }
@@ -142,7 +151,8 @@ function Show-Event-Logs {
         Write-host "With this file : $applicationFileLocation"
         Write-Host "EventId Info"
         Write-Host "---------------------------------------------------------------"
-        CompareTXT -textBefore $compareapplicationlog -textAfter $applicationFileLocation
+        $applicationdiff = CompareTXT -textBefore $compareapplicationlog -textAfter $applicationFileLocation
+        Write-Host $applicationdiff
     } else {
         Write-Host "========> No Application log to compare with"
     }
@@ -156,7 +166,8 @@ function Show-Event-Logs {
         Write-host "With this file : $securityFileLocation"
         Write-Host "EventId  Info"
         Write-Host "---------------------------------------------------------------"
-        CompareTXT -textBefore $comparesecuritylog -textAfter $securityFileLocation
+        $securitydiff = CompareTXT -textBefore $comparesecuritylog -textAfter $securityFileLocation
+        Write-Host $securitydiff
     } else {
         Write-Host "========> No Security log to compare with"
     }
@@ -164,4 +175,12 @@ function Show-Event-Logs {
     # Leave a blank line after the last output
     Write-Host "`n"
 
+    # $output = @()
+    # foreach ($item in $differenceOutput) {
+    #     $output += $item | ConvertTo-Html
+    # }
+
+    # $output = $output | ConvertTo-Html
+
+    return $differenceOutput
 }
