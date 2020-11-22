@@ -124,14 +124,11 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $comparesystemlog) {
         Write-Host "========> Comparing System log (whats new in todays log)"
-        Write-Host "EventId   Info"
-        $SystemCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesystemlog) -DifferenceObject (Get-Content -Path $systemfileLocation)
-        foreach ($item in $SystemCompare) {
-            if ($item.sideindicator -eq '=>')
-            {
-                Write-Host $item.InputObject
-            }
-        }
+        Write-Host "Compare this file: $comparesystemlog"
+        Write-host "With this file : $systemFileLocation"
+        Write-Host "EventId Info"
+        Write-Host "---------------------------------------------------------------"
+        CompareTXT -textBefore $comparesystemlog -textAfter $systemFileLocation
     } else {
         Write-Host "========> No System log to compare with"
     }
@@ -141,14 +138,11 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $compareapplicationlog) {
         Write-Host "========> Comparing Application log (whats new in todays log)"
-        Write-Host "EventId   Info"
-        $ApplicationCompare = Compare-Object -ReferenceObject (Get-Content -Path $compareapplicationlog) -DifferenceObject (Get-Content -Path $applicationfileLocation)
-        foreach ($item in $ApplicationCompare) {
-            if ($item.sideindicator -eq '=>')
-            {
-                Write-Host $item.InputObject
-            }
-        }
+        Write-Host "Compare this file: $compareapplicationlog"
+        Write-host "With this file : $applicationFileLocation"
+        Write-Host "EventId Info"
+        Write-Host "---------------------------------------------------------------"
+        CompareTXT -textBefore $compareapplicationlog -textAfter $applicationFileLocation
     } else {
         Write-Host "========> No Application log to compare with"
     }
@@ -158,17 +152,11 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $comparesecuritylog) {
         Write-Host "========> Comparing Security log (whats new in todays log)"
-        Write-Host "EventId   Info"
-
-        CompareTXT -textBefore "$comparesecuritylog" -textAfter "$securityFileLocation"
-
-        # $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
-        # foreach ($item in $SecurityCompare) {
-        #     if ($item.sideindicator -eq '=>')
-        #     {
-        #         Write-Host $item.InputObject
-        #     }
-        # }
+        Write-Host "Compare this file: $comparesecuritylog"
+        Write-host "With this file : $securityFileLocation"
+        Write-Host "EventId  Info"
+        Write-Host "---------------------------------------------------------------"
+        CompareTXT -textBefore $comparesecuritylog -textAfter $securityFileLocation
     } else {
         Write-Host "========> No Security log to compare with"
     }
