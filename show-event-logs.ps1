@@ -1,3 +1,5 @@
+. .\compareTXT.ps1
+
 function Show-Event-Logs {
     # Date format has to be dd-mm-yyyy
     $compareDate = "11-11-2020"
@@ -157,13 +159,16 @@ function Show-Event-Logs {
     if (Test-Path -Path $comparesecuritylog) {
         Write-Host "========> Comparing Security log (whats new in todays log)"
         Write-Host "EventId   Info"
-        $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
-        foreach ($item in $SecurityCompare) {
-            if ($item.sideindicator -eq '=>')
-            {
-                Write-Host $item.InputObject
-            }
-        }
+
+        CompareTXT -textBefore "$comparesecuritylog" -textAfter "$securityFileLocation"
+
+        # $SecurityCompare = Compare-Object -ReferenceObject (Get-Content -Path $comparesecuritylog) -DifferenceObject (Get-Content -Path $securityFileLocation)
+        # foreach ($item in $SecurityCompare) {
+        #     if ($item.sideindicator -eq '=>')
+        #     {
+        #         Write-Host $item.InputObject
+        #     }
+        # }
     } else {
         Write-Host "========> No Security log to compare with"
     }
