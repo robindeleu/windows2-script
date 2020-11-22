@@ -151,13 +151,12 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $comparesystemlog) {
         Write-Host "---------------------------------------------------------------"
-        Write-Host "========> Comparing System log (whats new in todays log)"
+        Write-Host "Comparing System log (whats new in todays log)"
         Write-Host "---------------------------------------------------------------"
         Write-Host "  Compare this file: $comparesystemlog"
         Write-host "  With this file : $systemFileLocation"
         Write-Host "---------------------------------------------------------------"
         Write-Host "EventId Info"
-        Write-Host "---------------------------------------------------------------"
         $systemdiff = CompareTXT -textBefore $comparesystemlog -textAfter $systemFileLocation
         Write-Host $systemdiff
     } else {
@@ -169,13 +168,12 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $compareapplicationlog) {
         Write-Host "---------------------------------------------------------------"
-        Write-Host "========> Comparing Application log (whats new in todays log)"
+        Write-Host "Comparing Application log (whats new in todays log)"
         Write-Host "---------------------------------------------------------------"
         Write-Host "Compare this file: $compareapplicationlog"
         Write-host "With this file : $applicationFileLocation"
         Write-Host "---------------------------------------------------------------"
         Write-Host "EventId Info"
-        Write-Host "---------------------------------------------------------------"
         $applicationdiff = CompareTXT -textBefore $compareapplicationlog -textAfter $applicationFileLocation
         Write-Host $applicationdiff
     } else {
@@ -187,13 +185,12 @@ function Show-Event-Logs {
 
     if (Test-Path -Path $comparesecuritylog) {
         Write-Host "---------------------------------------------------------------"
-        Write-Host "========> Comparing Security log (whats new in todays log)"
+        Write-Host "Comparing Security log (whats new in todays log)"
         Write-Host "---------------------------------------------------------------"
         Write-Host "Compare this file: $comparesecuritylog"
         Write-host "With this file : $securityFileLocation"
         Write-Host "---------------------------------------------------------------"
         Write-Host "EventId  Info"
-        Write-Host "---------------------------------------------------------------"
         $securitydiff = CompareTXT -textBefore $comparesecuritylog -textAfter $securityFileLocation
         Write-Host $securitydiff
     } else {
