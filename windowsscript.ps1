@@ -18,7 +18,7 @@ function Show-Menu {
     Clear-Host
     Write-Host "================ $Title ================"
     
-    Write-Host "1: Perform Full health check"
+    Write-Host "1: Healthcheck (full) with HTML output"
     Write-Host "2: Check CPU-usage"
     Write-Host "3: Check RAM-usage"
     Write-Host "4: Check Disk-usage"
