@@ -6,8 +6,8 @@ function Show-Services {
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
 
     # File names used to store/read
-    $fileBefore = "./logs/servicesafter.txt"
-    $fileAfter = "./logs/servicesbefore.txt"
+    $fileBefore = "./logs/servicesbefore.txt"
+    $fileAfter = "./logs/servicesafter.txt"
     $fileBackup = "./logs/backupServices.txt"
 
     # Output the important data in a nice formatted table and the date
