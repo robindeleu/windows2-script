@@ -28,7 +28,7 @@ Select  the function you want to use by typing the number next to it and hitting
 10: Show Services
 11: Open current directory with elevated permissions
 Q: Quit
-Please make a selection:   
+Please make a selection:
 ```
 
 ## CPU-usage
@@ -207,7 +207,6 @@ Log saved: ./logs/logfile-application-17-11-2020.txt
 ========> No Security log to compare with
 ========> No System log to compare with
 ========> No Application log to compare with
-Press any key to continue . . .
 ```
 
 ## Installed programs
@@ -222,32 +221,45 @@ Beware, if you want to compair
 ------------------------------------------------------
 
 
-DisplayName                                                                 DisplayVersion   Publisher                  InstallDate
------------                                                                 --------------   ---------                  -----------
-Adobe Creative Cloud                                                        4.8.2.476        Adobe Systems Incorporated
-                                                                                             Adobe Systems Incorporated 6/10/2019
+    Directory: D:\VIVES\Vakken\Windows2\windows2-script\logs
 
-                                                                                             Adobe Systems Incorporated 6/9/2019   
-Digilent Software                                                           1.5.8            Digilent, Inc.
-GNU Tools for ARM Embedded Processors 6-2017-q2-update 6 2017 (remove only) 6 2017-q2-update ARM Holdings
-Google Chrome                                                               86.0.4240.198    Google LLC                 20201112
-Kaspersky Secure Connection                                                 20.0.14.1085     Kaspersky
-Kaspersky Security Cloud                                                    20.0.14.1085     Kaspersky
 
+Mode          LastWriteTime Length Name
+----          ------------- ------ ----
+-a---- 23/11/2020     13:32      0 logfile-system-23-11-2020.txt
+-a---- 23/11/2020     13:32      0 logfile-security-23-11-2020.txt
+-a---- 23/11/2020     13:32      0 logfile-application-23-11-2020.txt
+
+
+
+DisplayName                    DisplayVersion  Publisher                  InstallDate
+-----------                    --------------  ---------                  -----------
+Visual Studio Community 2019   16.5.30011.22   Microsoft Corporation      20200511
+Adobe Digital Editions 4.5     4.5.11          Adobe Systems Incorporated
+Arduino                        1.8.9           Arduino LLC
+Audacity 2.3.3                 2.3.3           Audacity Team              20200423
+Battle.net                                     Blizzard Entertainment
+
+Visual Studio Build Tools 2017 15.9.28307.1300 Microsoft Corporation      20201113
+DB Browser for SQLite          3.10.1          DB Browser for SQLite Team
+Digilent Software              1.5.8           Digilent, Inc.
+Dream Aquarium
 
 
 
 saved in: ./logs/inst-prog-11-11-2020-2.txt
 
-InputObject                                                                                                                         SideIndicator
------------                                                                                                                         -------------
-Office 16 Click-to-Run Localization Component                               16.0.13328.20340 Microsoft Corporation      20201113    =>
-Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161              9.0.30729.6161   Microsoft Corporation      20180503    =>
-Adobe Refresh Manager                                                       1.8.0            Adobe Systems Incorporated 20200927    =>
-Adobe Acrobat Reader DC - Nederlands                                        20.013.20064     Adobe Systems Incorporated 20201105    =>
-Silicon Laboratories CP210x VCP Drivers for Windows XP/2003 Server/Vista/7  6.2.00           Silicon Laboratories, Inc. 20181127    =>
-Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030               11.0.61030       Microsoft Corporation      20180503    =>
-Office 16 Click-to-Run Localization Component                               16.0.13328.20340 Microsoft Corporation      20201113    <=
+------------------------------------------------------
+                difference's
+------------------------------------------------------
+
+Dropbox                                                                       110.4.458              Dropbox, Inc.
+GeoGebra 5                                                                    5.0.438.0              International GeoGebra Ins...
+Google Chrome                                                                 87.0.4280.66           Google LLC
+Microsoft Edge                                                                87.0.664.41            Microsoft Corporation
+Origin                                                                        10.5.88.45577          Electronic Arts, Inc.
+Wireshark 3.2.1 64-bit                                                        3.2.1                  The Wireshark developer co...
+Adobe Acrobat Reader DC - Nederlands                                          20.013.20066           Adobe Systems Incorporated
 ```
 
 ## Live Processes
@@ -262,16 +274,38 @@ Shows the user, the current live processes on the system.
 
 Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
 -------  ------    -----      -----     ------     --  -- -----------
-   2287      20    38920      23792   5.423,05   3652   0 audiodg
-   2917    4928   427636     245868   1.492,64  14740  14 Teams
-   1181      35   245824     215556     864,53   3736  14 Teams
-    537      38   194620     193872     727,42  23192  14 Code
-   5147     171   271564     151952     709,36  18176  14 Dropbox
-    429      92   167036     183276     500,02  21888  14 Teams
-    503    1120     9740      17084     480,73  17244  14 SynTPEnh
-   1417      29   239640     121516     259,58  16332  14 chrome
-    528     148   329908     289296     259,55  16336  14 Teams
-    961      79    63952      60348     228,11   5916  14 steam
+   7558       0      192        104   9.886,05      4   0 System
+    879      21    28760      33268   4.712,13  16076   0 audiodg
+      0       0     2396     110584   1.542,06   3032   0 Memory Compression
+    276      46    91892      32696   1.143,31  17844   0 cavwp
+    953      37    56620     214808   1.113,05   2384   0 cmdagent
+    469      20    12628       8396     754,13   1408   0 svchost
+   1511      65   175032     111220     669,11  15948  12 Teams
+    176      13    63460      66240     467,22  15452  12 software_reporter_tool
+    936      32   174660     108680     441,05  25256  12 Teams
+    323      17     8128       4408     413,25   6140   0 vmware-authd
+
+
+
+saved in: ./logs/proc-11-11-2020-2.txt
+
+------------------------------------------------------
+                difference's
+------------------------------------------------------
+
+GameBar
+GameBarFTServer
+hpqwmiex
+LockApp
+Microsoft.Photos
+MicrosoftEdgeUpdate
+RemindersServer
+rundll32
+software_reporter_tool
+software_reporter_tool
+software_reporter_tool
+software_reporter_tool
+usocoreworker
 ```
 
 ## Users
@@ -284,24 +318,63 @@ Shows the user, the users on the system along with the necessary info. And check
 ------------------------------------------------------
 
 
+    Directory: D:\VIVES\Vakken\Windows2\windows2-script\logs
+
+
+Mode          LastWriteTime Length Name
+----          ------------- ------ ----
+-a---- 23/11/2020     13:33      0 inst-prog-11-11-2020-2.txt
+-a---- 23/11/2020     13:35      0 proc-11-11-2020-2.txt
+
+
+
 Name                PrincipalSource LastLogon           PasswordChangeableDate PasswordLastSet     Description
 ----                --------------- ---------           ---------------------- ---------------     -----------
-WDAGUtilityAccount            Local                     16/09/2018 21:37:06    16/09/2018 21:37:06 Een gebruikersaccount dat wordt beheerd en gebruik...
-Gast                          Local                                                                Ingebouwd account voor gasttoegang op de computer ...
+WDAGUtilityAccount            Local                     16/09/2018 21:37:06    16/09/2018 21:37:06 Een gebruikersaccount dat wordt beheerd en gebruikt door het systeem voor Windows Defender Application Guard-scenario's.
+Gast                          Local                                                                Ingebouwd account voor gasttoegang op de computer of het domein
 Tjoep                         Local 16/03/2020 13:01:38 16/03/2020 13:00:10    16/03/2020 13:00:10
-Administrator                 Local 6/12/2017 1:37:21                          18/03/2017 4:53:19  Ingebouwd account voor beheer van de computer of h...
-DefaultAccount                Local                                                                Een gebruikersaccount dat wordt beheerd door het s...
+Administrator                 Local 6/12/2017 1:37:21                          18/03/2017 4:53:19  Ingebouwd account voor beheer van de computer of het domein
+DefaultAccount                Local                                                                Een gebruikersaccount dat wordt beheerd door het systeem.
 dhond              MicrosoftAccount                     16/03/2020 12:58:42    16/03/2020 12:58:42
 benja              MicrosoftAccount                     14/09/2018 19:21:13    14/09/2018 19:21:13
 mamam              MicrosoftAccount                     16/03/2020 12:58:42    16/03/2020 12:58:42
 
 
-dinsdag 11/17/2020 11:30 +01:00
+maandag 11/23/2020 13:36 +01:00
 
 Number of Local accounts:  5
 Number of Microsoft accounts:  3
 
-Files are the same
+Files are different
+PasswordChangeableDate : 16/09/2018 21:37:06
+PasswordLastSet        : 16/09/2018 21:37:06
+Description            : Een gebruikersaccount dat wordt beheerd en gebruikt door het systeem voor Windows Defender Application Guard-scenario's.
+Name                   : Gast
+Description            : Ingebouwd account voor gasttoegang op de computer of het domein
+Name                   : Tjoep
+LastLogon              : 16/03/2020 13:01:38
+PasswordChangeableDate : 16/03/2020 13:00:10
+PasswordLastSet        : 16/03/2020 13:00:10
+Description            :
+LastLogon              : 6/12/2017 1:37:21
+PasswordLastSet        : 18/03/2017 4:53:19
+Description            : Ingebouwd account voor beheer van de computer of het domein
+Description            : Een gebruikersaccount dat wordt beheerd door het systeem.
+Name                   : dhond
+PrincipalSource        : MicrosoftAccount
+PasswordChangeableDate : 16/03/2020 12:58:42
+PasswordLastSet        : 16/03/2020 12:58:42
+Description            :
+Name                   : benja
+PrincipalSource        : MicrosoftAccount
+PasswordChangeableDate : 14/09/2018 19:21:13
+PasswordLastSet        : 14/09/2018 19:21:13
+Description            :
+Name                   : mamam
+PrincipalSource        : MicrosoftAccount
+PasswordChangeableDate : 16/03/2020 12:58:42
+PasswordLastSet        : 16/03/2020 12:58:42
+Description            :
 ```
 
 ## Shares
@@ -326,6 +399,10 @@ SERVERS! D:\SERVERS!
 
 
 saved in: ./logs/shares-11-11-2020-2.txt
+
+------------------------------------------------------
+                difference's
+------------------------------------------------------
 ```
 
 ## Services
@@ -660,12 +737,29 @@ Number of Running Services:  149
 Number of Stopped Services:  163
 
 
-InputObject                                                        SideIndicator
------------                                                        -------------
-Stopped  ClipSVC            Client License Service (ClipSVC)       =>
-Stopped  AppXSvc            AppX Deployment Service (AppXSVC)      =>
-Running  AppXSvc            AppX Deployment Service (AppXSVC)      <=
-Running  ClipSVC            Client License Service (ClipSVC)       <=
+Files are different
+Stopped  PrintWorkflowUs... PrintWorkflow_d23742c
+Stopped  MessagingServic... MessagingService_d23742c
+Stopped  LxssManagerUser... LxssManagerUser_d23742c
+Stopped  gpsvc              Group Policy Client
+Stopped  CaptureService_... CaptureService_d23742c
+Stopped  ConsentUxUserSv... ConsentUX_d23742c
+Stopped  DeviceAssociati... DeviceAssociationBroker_d23742c
+Stopped  AarSvc_d23742c     Agent Activation Runtime_d23742c
+Stopped  DevicePickerUse... DevicePicker_d23742c
+Stopped  DevicesFlowUser... DevicesFlow_d23742c
+Running  UnistoreSvc_d23... User Data Storage_d23742c
+Running  UserDataSvc_d23... User Data Access_d23742c
+Running  AppXSvc            AppX Deployment Service (AppXSVC)
+Running  BcastDVRUserSer... Gebruikersservice GameDVR en uitzen...
+Running  XblAuthManager     Xbox Live-verificatiebeheer
+Running  CDPUserSvc_d23742c Gebruikerservice voor Connected Dev...
+Running  cbdhsvc_d23742c    Gebruikersservice voor klembord_d23...
+Running  W32Time            Windows Time
+Running  OneSyncSvc_d23742c Host synchroniseren_d23742c
+Running  hpqcaslwmiex       HP CASL Framework Service
+Running  PimIndexMainten... Contact Data_d23742c
+Running  DsSvc              Data Sharing Service
 ```
 
 ## Elevated permissions
@@ -675,5 +769,3 @@ Allows user to run powershell with elevated permissions. This is necessary for t
 ## Compare
 
 A script that compares two txt files and outputs the difference.
-
-## UML
