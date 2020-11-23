@@ -6,8 +6,8 @@ function Users {
     Write-Host "------------------------------------------------------`n" -ForegroundColor Green
 
     # File names used to store/read
-    $fileBefore = "./logs/usersafter.txt"
-    $fileAfter = "./logs/usersbefore.txt"
+    $fileBefore = "./logs/usersbefore.txt"
+    $fileAfter = "./logs/usersafter.txt"
     $fileBackup = "./logs/backupUsers.txt"
 
     # Output the important data in a nice formatted table and the date
