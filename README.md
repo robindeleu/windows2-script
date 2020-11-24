@@ -212,8 +212,7 @@ Log saved: ./logs/logfile-application-17-11-2020.txt
 ## Installed programs
 
 Shows the user, the first ten installed programs on the system along with the necessary info. And checks if it changed from the last time checked.
-
-Beware, if you want to compair
+Beware, if you want to compair you must to change the $saveid= , number 1 if for the reference (befor) and number 2 is the difference object (after).
 
 ```bash
 ------------------------------------------------------
@@ -265,6 +264,7 @@ Adobe Acrobat Reader DC - Nederlands                                          20
 ## Live Processes
 
 Shows the user, the current live processes on the system.
+Beware, if you want to compair you must to change the $saveid= , number 1 if for the reference (befor) and number 2 is the difference object (after).
 
 ```bash
 ------------------------------------------------------
@@ -380,6 +380,7 @@ Description            :
 ## Shares
 
 Shows the user, the shares on the system and makes a backup.
+Beware, if you want to compair you must to change the $saveid= , number 1 if for the reference (befor) and number 2 is the difference object (after).
 
 ```bash
 ------------------------------------------------------
